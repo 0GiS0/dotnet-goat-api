@@ -12,5 +12,6 @@
   </Target>
   <ItemGroup>
     <PostDeploy Include="populateCustomers.sql" />
+    <None Include="populateUsers.sql" />
   </ItemGroup>
 </Project>

@@ -17,12 +17,11 @@
 			"settings": { 
 				"mssql.connections": [
 					{
-						"server": "localhost,1433",
+						"server": "localhost",
 						"database": "",
 						"authenticationType": "SqlLogin",
 						"user": "sa",
 						"password": "P@ssw0rd",
-						"emptyPasswordInput": false,
 						"savePassword": false,
 						"profileName": "mssql-container"
 					}
@@ -34,7 +33,9 @@
 				"ms-dotnettools.csharp",
 				"ms-mssql.mssql",
 				"GitHub.copilot",
-				"codezombiech.gitignore"
+				"codezombiech.gitignore",
+				"ms-azuretools.vscode-azureappservice",
+				"ms-azuretools.vscode-cosmosdb"
 			]
 		}
 	},

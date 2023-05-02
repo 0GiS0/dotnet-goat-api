@@ -19,6 +19,41 @@ public class GoatsController : ControllerBase
 
 
     // A01:2021-Broken Access Control 
+    // goats/profile?id=1
+    [HttpGet("profile")]
+    public IEnumerable<object> GetProfile()
+    {
+
+        _logger.LogInformation("GetProfile called");
+
+        var id = int.Parse(Request.Query["id"]);
+
+        _logger.LogInformation($"GetProfile called with id {id}");
+
+        //Get user profile from database
+        // Get connection string form appsettings.json
+        using var connection = new SqlConnection(Configuration.GetConnectionString("DefaultConnection"));
+
+        connection.Open();
+
+        using var command = new SqlCommand($"SELECT * FROM Users WHERE Id= @ID;", connection);
+        command.Parameters.AddWithValue("@ID", id);
+
+        using var reader = command.ExecuteReader();
+        while (reader.Read())
+        {
+            yield return new
+            {
+                Id = reader.GetInt32(0),
+                UserName = reader.GetString(1),
+                Password = reader.GetString(2),
+                Email = reader.GetString(3),
+                IsAdmin = reader.GetBoolean(4),
+                IsLocked = reader.GetBoolean(5),
+                LastLogin = reader.GetDateTime(6)
+            };
+        }
+    }
 
     // A02:2021-Cryptographic Failures
 
@@ -27,13 +62,13 @@ public class GoatsController : ControllerBase
     public IEnumerable<object> GetCustomerByIdInTheWrongWay()
     {
 
-        _logger.LogInformation("GetCustomers called");       
+        _logger.LogInformation("GetCustomers called");
 
         // Get connection string form appsettings.json
         var builder = new SqlConnectionStringBuilder
         {
             ConnectionString = Configuration.GetConnectionString("DefaultConnection")
-        };        
+        };
 
         using var connection = new SqlConnection(builder.ConnectionString);
 
