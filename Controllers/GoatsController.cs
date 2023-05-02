@@ -19,8 +19,8 @@ public class GoatsController : ControllerBase
 
 
     // A01:2021-Broken Access Control 
-    // goats/profile?id=1
-    [HttpGet("profile")]
+    // /profile?id=1
+    [HttpGet("/profile")]
     public IEnumerable<object> GetProfile()
     {
 
