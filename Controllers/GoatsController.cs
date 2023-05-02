@@ -1,0 +1,76 @@
+namespace dotnet_goat_api.Controllers;
+using Microsoft.Data.SqlClient;
+using Microsoft.AspNetCore.Mvc;
+
+[ApiController]
+[Route("[controller]")]
+public class GoatsController : ControllerBase
+{
+
+    private readonly ILogger<WeatherForecastController> _logger;
+    private readonly IConfiguration Configuration;
+
+
+    public GoatsController(ILogger<WeatherForecastController> logger, IConfiguration configuration)
+    {
+        _logger = logger;
+        Configuration = configuration;
+    }
+
+
+    // A01:2021-Broken Access Control 
+
+    // A02:2021-Cryptographic Failures
+
+    // A03:2021-Injection
+    [HttpGet]
+    public IEnumerable<object> GetCustomerByIdInTheWrongWay()
+    {
+
+        _logger.LogInformation("GetCustomers called");       
+
+        // Get connection string form appsettings.json
+        var builder = new SqlConnectionStringBuilder
+        {
+            ConnectionString = Configuration.GetConnectionString("DefaultConnection")
+        };        
+
+        using var connection = new SqlConnection(builder.ConnectionString);
+
+        var id = Request.Query["id"];
+
+        _logger.LogInformation($"GetCustomers called with id {id}");
+
+        connection.Open();
+
+        using var command = new SqlCommand($"SELECT * FROM Customers WHERE Id={id}", connection);
+
+        using var reader = command.ExecuteReader();
+        while (reader.Read())
+        {
+            yield return new
+            {
+                Id = reader.GetInt32(0),
+                Name = reader.GetString(1)
+            };
+        }
+
+    }
+
+
+
+    // A04:2021-Insecure Design
+
+    // A05:2021-Security Misconfiguration
+
+    // A06:2021-Vulnerable and Outdated Components
+
+    // A07:2021-Identification and Authentication Failures
+
+    // A08:2021-Software and Data Integrity Failures
+
+    // A09:2021-Security Logging and Monitoring Failures
+
+    // A10:2021-Server-Side Request Forgery  
+
+}
