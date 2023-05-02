@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 public class GoatsController : ControllerBase
 {
 
-    private readonly ILogger<WeatherForecastController> _logger;
+    private readonly ILogger<GoatsController> _logger;
     private readonly IConfiguration Configuration;
 
 
-    public GoatsController(ILogger<WeatherForecastController> logger, IConfiguration configuration)
+    public GoatsController(ILogger<GoatsController> logger, IConfiguration configuration)
     {
         _logger = logger;
         Configuration = configuration;
