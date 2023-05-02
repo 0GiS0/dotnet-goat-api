@@ -21,7 +21,6 @@ public class GoatsController : ControllerBase
 
 
     // A01:2021-Broken Access Control 
-    // /profile?id=1
     [HttpGet("/profile")]
     public IEnumerable<object> GetProfile()
     {
@@ -118,8 +117,6 @@ public class GoatsController : ControllerBase
         }
 
     }
-
-
 
     // A04:2021-Insecure Design
 
