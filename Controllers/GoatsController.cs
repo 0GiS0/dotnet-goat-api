@@ -1,6 +1,8 @@
 namespace dotnet_goat_api.Controllers;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography;
+using System.Text;
 
 [ApiController]
 [Route("[controller]")]
@@ -56,9 +58,34 @@ public class GoatsController : ControllerBase
     }
 
     // A02:2021-Cryptographic Failures
+    [HttpPost("/newuser")]
+    public IActionResult NewUserWithMD5Hash([FromBody] User user)
+    {
+        _logger.LogInformation("NewUser called");
+
+        // Get connection string form appsettings.json
+        using var connection = new SqlConnection(Configuration.GetConnectionString("DefaultConnection"));
+
+        connection.Open();
+
+        using var command = new SqlCommand($"INSERT INTO Users (UserName, Password, Email, IsAdmin, IsLocked, LastLogin) VALUES (@UserName, @Password, @Email, @IsAdmin, @IsLocked, @LastLogin);", connection);
+        command.Parameters.AddWithValue("@UserName", user.UserName);
+        // hash password with MD5
+        var md5 = MD5.Create();
+        var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(user.Password));
+        command.Parameters.AddWithValue("@Password", hash);
+        command.Parameters.AddWithValue("@Email", user.Email);
+        command.Parameters.AddWithValue("@IsAdmin", user.IsAdmin);
+        command.Parameters.AddWithValue("@IsLocked", user.IsLocked);
+        command.Parameters.AddWithValue("@LastLogin", DateTime.Today);
+
+        command.ExecuteNonQuery();
+
+        return Ok();
+    }
 
     // A03:2021-Injection
-    [HttpGet]
+    [HttpGet("/customer")]
     public IEnumerable<object> GetCustomerByIdInTheWrongWay()
     {
 

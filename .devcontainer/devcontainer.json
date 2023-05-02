@@ -35,7 +35,8 @@
 				"GitHub.copilot",
 				"codezombiech.gitignore",
 				"ms-azuretools.vscode-azureappservice",
-				"ms-azuretools.vscode-cosmosdb"
+				"ms-azuretools.vscode-cosmosdb",
+				"humao.rest-client"
 			]
 		}
 	},
