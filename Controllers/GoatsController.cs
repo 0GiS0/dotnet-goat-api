@@ -130,6 +130,7 @@ public class GoatsController : ControllerBase
     // A05:2021-Security Misconfiguration
 
     // A06:2021-Vulnerable and Outdated Components
+    // Execute dotnet list package --vulnerable
 
     // A07:2021-Identification and Authentication Failures
 
