@@ -38,7 +38,8 @@
 				"ms-azuretools.vscode-cosmosdb",
 				"humao.rest-client",
 				"MS-CST-E.vscode-devskim",
-				"redhat.vscode-xml"
+				"redhat.vscode-xml",
+				"eamodio.gitlens"
 			]
 		}
 	},

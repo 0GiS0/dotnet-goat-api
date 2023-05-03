@@ -135,6 +135,26 @@ public class GoatsController : ControllerBase
     // A07:2021-Identification and Authentication Failures
 
     // A08:2021-Software and Data Integrity Failures
+    [HttpPost("/addcreditcard")]
+    public IActionResult AddCreditCard([FromBody] CreditCard creditCard)
+    {
+        _logger.LogInformation("AddCreditCard called");
+
+        // Get connection string form appsettings.json
+        // using var connection = new SqlConnection(Configuration.GetConnectionString("DefaultConnection"));
+
+        // connection.Open();
+
+        // using var command = new SqlCommand($"INSERT INTO CreditCards (CardNumber, ExpirationDate, CVV, UserId) VALUES (@CardNumber, @ExpirationDate, @CVV, @UserId);", connection);
+        // command.Parameters.AddWithValue("@CardNumber", creditCard.CardNumber);
+        // command.Parameters.AddWithValue("@ExpirationDate", creditCard.ExpirationDate);
+        // command.Parameters.AddWithValue("@CVV", creditCard.CVV);
+        // command.Parameters.AddWithValue("@UserId", creditCard.UserId);
+
+        // command.ExecuteNonQuery();
+
+        return Ok();
+    }
 
     // A09:2021-Security Logging and Monitoring Failures
 
