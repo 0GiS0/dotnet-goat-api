@@ -36,7 +36,8 @@
 				"codezombiech.gitignore",
 				"ms-azuretools.vscode-azureappservice",
 				"ms-azuretools.vscode-cosmosdb",
-				"humao.rest-client"
+				"humao.rest-client",
+				"MS-CST-E.vscode-devskim"
 			]
 		}
 	},
