@@ -37,7 +37,8 @@
 				"ms-azuretools.vscode-azureappservice",
 				"ms-azuretools.vscode-cosmosdb",
 				"humao.rest-client",
-				"MS-CST-E.vscode-devskim"
+				"MS-CST-E.vscode-devskim",
+				"redhat.vscode-xml"
 			]
 		}
 	},

@@ -83,7 +83,14 @@ public class GoatsController : ControllerBase
         return Ok();
     }
 
-    // A03:2021-Injection
+    /// <summary>
+    /// A03:2021-Injection
+    /// </summary>
+    /// <remarks>
+    /// More elaborate description
+    /// </remarks>
+    /// <param name="id" example="1"></param>
+    /// <returns>Customer object</returns>    
     [HttpGet("/customer")]
     public IEnumerable<object> GetCustomerByIdInTheWrongWay()
     {
