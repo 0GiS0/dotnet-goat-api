@@ -33,6 +33,11 @@
             "stopAtEntry": false,
             "env": {
                 "ASPNETCORE_URLS": "http://localhost:5077"
+            },
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+https://localhost:([0-9]+)",
+                "uriFormat": "%s/swagger"
             }
         },
         {

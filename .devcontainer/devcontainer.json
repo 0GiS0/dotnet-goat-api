@@ -39,7 +39,8 @@
 				"humao.rest-client",
 				"MS-CST-E.vscode-devskim",
 				"redhat.vscode-xml",
-				"eamodio.gitlens"
+				"eamodio.gitlens",
+				"GitHub.vscode-github-actions"
 			]
 		}
 	},

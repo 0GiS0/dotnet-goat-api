@@ -20,15 +20,15 @@ public class GoatsController : ControllerBase
     }
 
     /// <summary>
-    /// A01:2021-Broken Access Control 
+    /// API1:2023 Broken Object Level Authorization
     /// </summary>
     /// <remarks>
-    /// More elaborate description
+    /// Attackers can exploit API endpoints that are vulnerable to broken object level authorization by manipulating the ID of an object that is sent within the request.
     /// </remarks>
     /// <param name="profileId" example="1"></param>
     /// <returns>Profile object</returns>    
     [HttpGet("/profile")]
-    public IEnumerable<object> GetProfile([FromQuery] string profileId)
+    public IEnumerable<object> GetProfile([FromQuery] int profileId)
     {
 
         _logger.LogInformation("GetProfile called");

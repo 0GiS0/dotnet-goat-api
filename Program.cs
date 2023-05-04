@@ -1,4 +1,5 @@
 using System.Reflection;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,13 @@ builder.Services.AddSwaggerGen(options =>
     // using System.Reflection;
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Dotnet Goat API",
+        Description = "This API try to show all the vulnerabilities that you can find in an API following the OWASP Top 10 here: <a target='_blank' href='https://github.com/OWASP/API-Security/tree/master/2023/en/src'>https://github.com/OWASP/API-Security/tree/master/2023/en/src</a>"
+    });
 });
 
 var app = builder.Build();
