@@ -84,8 +84,10 @@ jobs:
       - name: Snyk Container monitor
         run: snyk container monitor your/image-to-test --file=Dockerfile  --sarif > ${{env.SARIF_FOLDER}}/snyk-container.sarif || true
 
+      - name: Check results
+        run: ls -l ${{env.SARIF_FOLDER}}
         # Push the Snyk Code results into GitHub Code Scanning tab
       - name: Upload result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: ${{env.SARIF_FOLDER}}
+          sarif_file: ./results/*.sarif
