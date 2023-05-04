@@ -24,7 +24,7 @@ snyk iac test
 
 ##### Using GitHub CLI ######
 gh auth login
-SQL_CONNECTION_STRING=$(terraform output connection_string)
+SQL_CONNECTION_STRING=$(terraform  output -raw connection_string)
 gh secret set SQL_CONNECTION_STRING --body "$SQL_CONNECTION_STRING"
 
 # Create a service principal for GitHub Actions
