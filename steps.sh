@@ -13,7 +13,7 @@ SNYK_TOKEN="<your-snyk-token>"
 snyk auth $SNYK_TOKEN
 
 # Scan for vulnerabilities
-snyk test --all-projects
+snyk code test --all-projects --sarif > results.sarif
 
 # Snapshot and continuously monitor a project for open source vulnerabilities and license issues.
 snyk monitor --all-projects
