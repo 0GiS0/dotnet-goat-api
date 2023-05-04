@@ -1,5 +1,5 @@
 {
     "appService.preDeployTask": "publish-release",
     "appService.deploySubpath": "bin/Release/net7.0/publish",
-    "appService.defaultWebAppToDeploy": "/subscriptions/3dda189f-8e19-4aff-96c5-c9597f59108a/resourceGroups/goat-demos/providers/Microsoft.Web/sites/goat-dotnet-api"
+    "appService.defaultWebAppToDeploy": ""
 }

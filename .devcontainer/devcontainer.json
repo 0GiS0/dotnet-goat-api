@@ -41,7 +41,10 @@
 				"redhat.vscode-xml",
 				"eamodio.gitlens",
 				"GitHub.vscode-github-actions",
-				"ms-azuretools.vscode-docker"
+				"ms-azuretools.vscode-docker",
+				"4ops.terraform",
+				"ms-azuretools.vscode-azureterraform",
+				"tintinweb.graphviz-interactive-preview"
 			]
 		}
 	},
@@ -62,6 +65,9 @@
 		},
 		"ghcr.io/devcontainers-contrib/features/terraform-asdf:2": {
 			"version": "latest"
+		},
+		"ghcr.io/meaningful-ooo/devcontainer-features/homebrew:2": {
+			"shallowClone": true
 		}
 	}
 
