@@ -22,14 +22,14 @@ content-type: application/json
 
 ###
 
-# POST http://localhost:5077/addcreditcard HTTP/1.1
-POST http://goat-dotnet-api.azurewebsites.net/addcreditcard HTTP/1.1
+POST http://localhost:5077/addcreditcard HTTP/1.1
+# POST http://goat-dotnet-api.azurewebsites.net/addcreditcard HTTP/1.1
 content-type: application/json
 
 {
     "CardNumber": "1234567890123456",
     "ExpirationDate": "2020-12-31",
     "CVV": "123",
-    "CustomerId": 1
+    "UserId": 1
     
 }

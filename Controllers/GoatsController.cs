@@ -19,15 +19,21 @@ public class GoatsController : ControllerBase
         Configuration = configuration;
     }
 
-
-    // A01:2021-Broken Access Control 
+    /// <summary>
+    /// A01:2021-Broken Access Control 
+    /// </summary>
+    /// <remarks>
+    /// More elaborate description
+    /// </remarks>
+    /// <param name="id" example="1"></param>
+    /// <returns>Customer object</returns>    
     [HttpGet("/profile")]
-    public IEnumerable<object> GetProfile()
+    public IEnumerable<object> GetProfile([FromQuery] string id)
     {
 
         _logger.LogInformation("GetProfile called");
 
-        var id = int.Parse(Request.Query["id"]);
+        // var id = int.Parse(Request.Query["id"]);
 
         _logger.LogInformation($"GetProfile called with id {id}");
 
@@ -37,7 +43,8 @@ public class GoatsController : ControllerBase
 
         connection.Open();
 
-        using var command = new SqlCommand($"SELECT * FROM Users WHERE Id= @ID;", connection);
+        // Get credit card number from CreditCards table and the user name from the users table
+        using var command = new SqlCommand($"SELECT Users.Id, Users.UserName, CreditCards.CardNumber FROM Users INNER JOIN CreditCards ON Users.Id=CreditCards.UserId WHERE Users.Id= @ID;", connection);
         command.Parameters.AddWithValue("@ID", id);
 
         using var reader = command.ExecuteReader();
@@ -47,11 +54,12 @@ public class GoatsController : ControllerBase
             {
                 Id = reader.GetInt32(0),
                 UserName = reader.GetString(1),
-                Password = reader.GetString(2),
-                Email = reader.GetString(3),
-                IsAdmin = reader.GetBoolean(4),
-                IsLocked = reader.GetBoolean(5),
-                LastLogin = reader.GetDateTime(6)
+                CardNumber = reader.GetString(2)
+                // Password = reader.GetString(2),
+                // Email = reader.GetString(3),
+                // IsAdmin = reader.GetBoolean(4),
+                // IsLocked = reader.GetBoolean(5),
+                // LastLogin = reader.GetDateTime(6)
             };
         }
     }
@@ -92,7 +100,7 @@ public class GoatsController : ControllerBase
     /// <param name="id" example="1"></param>
     /// <returns>Customer object</returns>    
     [HttpGet("/customer")]
-    public IEnumerable<object> GetCustomerByIdInTheWrongWay()
+    public IEnumerable<object> GetCustomerByIdInTheWrongWay([FromQuery] string id)
     {
 
         _logger.LogInformation("GetCustomers called");
@@ -105,7 +113,7 @@ public class GoatsController : ControllerBase
 
         using var connection = new SqlConnection(builder.ConnectionString);
 
-        var id = Request.Query["id"];
+        // var id = Request.Query["id"];
 
         _logger.LogInformation($"GetCustomers called with id {id}");
 
@@ -141,17 +149,17 @@ public class GoatsController : ControllerBase
         _logger.LogInformation("AddCreditCard called");
 
         // Get connection string form appsettings.json
-        // using var connection = new SqlConnection(Configuration.GetConnectionString("DefaultConnection"));
+        using var connection = new SqlConnection(Configuration.GetConnectionString("DefaultConnection"));
 
-        // connection.Open();
+        connection.Open();
 
-        // using var command = new SqlCommand($"INSERT INTO CreditCards (CardNumber, ExpirationDate, CVV, UserId) VALUES (@CardNumber, @ExpirationDate, @CVV, @UserId);", connection);
-        // command.Parameters.AddWithValue("@CardNumber", creditCard.CardNumber);
-        // command.Parameters.AddWithValue("@ExpirationDate", creditCard.ExpirationDate);
-        // command.Parameters.AddWithValue("@CVV", creditCard.CVV);
-        // command.Parameters.AddWithValue("@UserId", creditCard.UserId);
+        using var command = new SqlCommand($"INSERT INTO CreditCards (CardNumber, ExpirationDate, CVV, UserId) VALUES (@CardNumber, @ExpirationDate, @CVV, @UserId);", connection);
+        command.Parameters.AddWithValue("@CardNumber", creditCard.CardNumber);
+        command.Parameters.AddWithValue("@ExpirationDate", creditCard.ExpirationDate);
+        command.Parameters.AddWithValue("@CVV", creditCard.CVV);
+        command.Parameters.AddWithValue("@UserId", creditCard.UserId);
 
-        // command.ExecuteNonQuery();
+        command.ExecuteNonQuery();
 
         return Ok();
     }
