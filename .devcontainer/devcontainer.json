@@ -22,7 +22,7 @@
 						"authenticationType": "SqlLogin",
 						"user": "sa",
 						"password": "P@ssw0rd",
-						"savePassword": false,
+						"savePassword": true,
 						"profileName": "mssql-container"
 					}
 				]
@@ -40,7 +40,8 @@
 				"MS-CST-E.vscode-devskim",
 				"redhat.vscode-xml",
 				"eamodio.gitlens",
-				"GitHub.vscode-github-actions"
+				"GitHub.vscode-github-actions",
+				"ms-azuretools.vscode-docker"
 			]
 		}
 	},
