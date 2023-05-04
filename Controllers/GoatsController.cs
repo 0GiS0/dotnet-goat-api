@@ -25,17 +25,17 @@ public class GoatsController : ControllerBase
     /// <remarks>
     /// More elaborate description
     /// </remarks>
-    /// <param name="id" example="1"></param>
-    /// <returns>Customer object</returns>    
+    /// <param name="profileId" example="1"></param>
+    /// <returns>Profile object</returns>    
     [HttpGet("/profile")]
-    public IEnumerable<object> GetProfile([FromQuery] string id)
+    public IEnumerable<object> GetProfile([FromQuery] string profileId)
     {
 
         _logger.LogInformation("GetProfile called");
 
         // var id = int.Parse(Request.Query["id"]);
 
-        _logger.LogInformation($"GetProfile called with id {id}");
+        _logger.LogInformation($"GetProfile called with id {profileId}");
 
         //Get user profile from database
         // Get connection string form appsettings.json
@@ -45,7 +45,7 @@ public class GoatsController : ControllerBase
 
         // Get credit card number from CreditCards table and the user name from the users table
         using var command = new SqlCommand($"SELECT Users.Id, Users.UserName, CreditCards.CardNumber FROM Users INNER JOIN CreditCards ON Users.Id=CreditCards.UserId WHERE Users.Id= @ID;", connection);
-        command.Parameters.AddWithValue("@ID", id);
+        command.Parameters.AddWithValue("@ID", profileId);
 
         using var reader = command.ExecuteReader();
         while (reader.Read())
@@ -55,18 +55,21 @@ public class GoatsController : ControllerBase
                 Id = reader.GetInt32(0),
                 UserName = reader.GetString(1),
                 CardNumber = reader.GetString(2)
-                // Password = reader.GetString(2),
-                // Email = reader.GetString(3),
-                // IsAdmin = reader.GetBoolean(4),
-                // IsLocked = reader.GetBoolean(5),
-                // LastLogin = reader.GetDateTime(6)
             };
         }
     }
 
-    // A02:2021-Cryptographic Failures
+
+    /// <summary>
+    /// A02:2021-Cryptographic Failures
+    /// </summary>
+    /// <remarks>
+    /// SQL Injection demo
+    /// </remarks>
+    /// <param name="user"></param>
+    /// <returns>Customer object</returns>    
     [HttpPost("/newuser")]
-    public IActionResult NewUserWithMD5Hash([FromBody] User user)
+    public IActionResult NewUserWithInsecureHash([FromBody] User user)
     {
         _logger.LogInformation("NewUser called");
 
@@ -95,9 +98,9 @@ public class GoatsController : ControllerBase
     /// A03:2021-Injection
     /// </summary>
     /// <remarks>
-    /// More elaborate description
+    /// SQL Injection demo
     /// </remarks>
-    /// <param name="id" example="1"></param>
+    /// <param name="id" example="1 and 1=1"></param>
     /// <returns>Customer object</returns>    
     [HttpGet("/customer")]
     public IEnumerable<object> GetCustomerByIdInTheWrongWay([FromQuery] string id)
@@ -142,7 +145,15 @@ public class GoatsController : ControllerBase
 
     // A07:2021-Identification and Authentication Failures
 
-    // A08:2021-Software and Data Integrity Failures
+
+    /// <summary>
+    /// A08:2021-Software and Data Integrity Failures
+    /// </summary>
+    /// <remarks>
+    /// This method adds a credit card to the database
+    /// </remarks>
+    /// <param name="creditCard"></param>
+    /// <returns>Customer object</returns>    
     [HttpPost("/addcreditcard")]
     public IActionResult AddCreditCard([FromBody] CreditCard creditCard)
     {
