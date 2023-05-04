@@ -85,8 +85,8 @@ resource "azurerm_app_service" "webapp" {
     DiagnosticServices_EXTENSION_VERSION            = "~3"
     InstrumentationEngine_EXTENSION_VERSION         = "~1"
     SnapshotDebugger_EXTENSION_VERSION              = "~1"
-    XDT_MicrosoftApplicationInsights_BaseExtensions = "~1"    
-    XDT_MicrosoftApplicationInsights_Mode           = "recommended"    
+    XDT_MicrosoftApplicationInsights_BaseExtensions = "~1"
+    XDT_MicrosoftApplicationInsights_Mode           = "recommended"
     XDT_MicrosoftApplicationInsights_PreemptSdk     = "1"
   }
 
