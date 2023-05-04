@@ -11,7 +11,9 @@
     <Delete Files="$(BaseIntermediateOutputPath)\project.assets.json" />
   </Target>
   <ItemGroup>
-    <PostDeploy Include="populateCustomers.sql" />
-    <None Include="populateUsers.sql" />
+    <Folder Include="Tables\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="populateDb.sql" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 CREATE TABLE [dbo].[Customers]
 (
-  [Id] INT NOT NULL PRIMARY KEY IDENTITY,  
+  [Id] INT NOT NULL PRIMARY KEY IDENTITY,
   [Name] NVARCHAR(50) NOT NULL,
   [Address] NVARCHAR(50) NOT NULL,
   [City] NVARCHAR(50) NOT NULL,
@@ -14,5 +14,5 @@ CREATE TABLE [dbo].[Customers]
   [CreditCardExpiration] NVARCHAR(50) NOT NULL,
   [Username] NVARCHAR(50) NOT NULL,
   [Password] NVARCHAR(50) NOT NULL
-  
+
 )
