@@ -37,6 +37,7 @@ jobs:
     env:
       # This is where you will need to introduce the Snyk API token created with your Snyk account
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      SARIF_FOLDER: ../results
     steps:
       - uses: actions/checkout@v3
       - name: Set up Snyk CLI to check for security issues
@@ -54,33 +55,29 @@ jobs:
         run: dotnet build --configuration Release --no-restore
       
       - name: Create results directory
-        run: mkdir -p ./results
+        run: mkdir -p ${{env.SARIF_FOLDER}}}
 
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/dotnet@master
         continue-on-error: true # To make sure that SARIF upload gets called       
         with:
-          args: --sarif-file-output=./results/snyk.sarif
+          args: --sarif-file-output=${{env.SARIF_FOLDER}}/snyk.sarif
       
         # Runs Snyk Code (SAST) analysis and uploads result into GitHub.
         # Use || true to not fail the pipeline
       - name: Snyk Code test
-        run: snyk code test --all-projects --sarif > ./results/snyk-code.sarif || true        
+        run: snyk code test --all-projects --sarif > ${{env.SARIF_FOLDER}}/snyk-code.sarif || true        
       
       - name: Check results folder
-        run: ls -l ./results
+        run: ls -l ${{env.SARIF_FOLDER}}
 
-      #   # Runs Snyk Open Source (SCA) analysis and uploads result to Snyk.
+      # Runs Snyk Open Source (SCA) analysis and uploads result to Snyk.
       - name: Snyk Open Source monitor
-        run: snyk monitor --all-projects --sarif > ./results/snyk-oss.sarif || true
-      #   env:
-      #     # This is where you will need to introduce the Snyk API token created with your Snyk account
-      #     SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        run: snyk monitor --all-projects --sarif > ${{env.SARIF_FOLDER}}/snyk-oss.sarif || true
 
-      #   # Runs Snyk Infrastructure as Code (IaC) analysis and uploads result to Snyk.
-      #   # Use || true to not fail the pipeline.
+      # Runs Snyk Infrastructure as Code (IaC) analysis and uploads result to Snyk.
       - name: Snyk IaC test and report
-        run: snyk iac test --report  --sarif > ./results/snyk-iac.sarif || true       
+        run: snyk iac test --report  --sarif > ${{env.SARIF_FOLDER}}/snyk-iac.sarif || true       
         working-directory: ./terraform
 
         # Build the docker image for testing
@@ -88,7 +85,7 @@ jobs:
         run: docker build -t your/image-to-test . 
         # Runs Snyk Container (Container and SCA) analysis and uploads result to Snyk.
       - name: Snyk Container monitor
-        run: snyk container monitor your/image-to-test --file=Dockerfile  --sarif > ./results/snyk-container.sarif || true
+        run: snyk container monitor your/image-to-test --file=Dockerfile  --sarif > ${{env.SARIF_FOLDER}}/snyk-container.sarif || true
 
         # Push the Snyk Code results into GitHub Code Scanning tab
       - name: Upload result to GitHub Code Scanning
