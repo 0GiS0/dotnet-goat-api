@@ -65,7 +65,7 @@ jobs:
         # Runs Snyk Code (SAST) analysis and uploads result into GitHub.
         # Use || true to not fail the pipeline
       - name: Snyk Code test
-        run: snyk code test --all-projects --sarif > ./results/snyk-code.sarif
+        run: snyk code test --all-projects --sarif
         continue-on-error: true
 
       #   # Runs Snyk Open Source (SCA) analysis and uploads result to Snyk.
