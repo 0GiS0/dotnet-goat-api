@@ -3,6 +3,8 @@ name: Snyk Security
 on:
   push:
     branches: ["main" ]
+    paths-ignore:
+      - ".github/workflows/*"      
   pull_request:
     branches: ["main"]
 
