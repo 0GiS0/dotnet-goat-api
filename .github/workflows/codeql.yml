@@ -14,6 +14,11 @@ name: "CodeQL"
 on:
   push:
     branches: [ "main" ]
+    paths-ignore:
+      - ".github/workflows/codeql.yml"
+      - ".github/workflows/build-docker-image.yaml"
+      - ".github/workflows/sonarcloud.yml"
+      - ".github/workflows/sonarcloud-analysis.yml"
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ "main" ]
