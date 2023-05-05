@@ -79,7 +79,7 @@ jobs:
       - name: Snyk IaC test and report
         run: | 
           snyk iac test --sarif || true
-          snyk iac test --sarif > ${{env.SARIF_FOLDER}}/snyk-iac.sarif || true       
+          snyk iac test --sarif > ../${{env.SARIF_FOLDER}}/snyk-iac.sarif || true       
         working-directory: ./terraform
       
       # Build the docker image for testing
