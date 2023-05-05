@@ -55,7 +55,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore
       
       - name: Create results directory and give permissions
-        run: mkdir ${{env.SARIF_FOLDER}}} && chmod 777 ${{env.SARIF_FOLDER}}
+        run: mkdir ${{env.SARIF_FOLDER}}
 
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/dotnet@master
@@ -99,4 +99,4 @@ jobs:
       - name: Upload result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: sarif-results
+          sarif_file: ${{env.SARIF_FOLDER}}
