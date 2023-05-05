@@ -54,7 +54,7 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
       
-      - name: Create results directory and give permissions
+      - name: Create ${{env.SARIF_FOLDER}} directory
         run: mkdir ${{env.SARIF_FOLDER}}
 
       - name: Run Snyk to check for vulnerabilities
@@ -69,19 +69,12 @@ jobs:
         run: | 
           snyk code test --all-projects --sarif || true
           snyk code test --all-projects --sarif-file-output=${{env.SARIF_FOLDER}}/snyk-code.sarif || true
-      
-      - name: Check results
-        run: ls -l ${{env.SARIF_FOLDER}}
 
       # Runs Snyk Open Source (SCA) analysis and uploads result to Snyk.
       - name: Snyk Open Source monitor      
         run: |
-          snyk monitor --all-projects --sarif || true
-          snyk monitor --all-projects --sarif > ${{env.SARIF_FOLDER}}/snyk-oss.sarif || true
+          snyk monitor --all-projects          
       
-      - name: Check results
-        run: ls -l ${{env.SARIF_FOLDER}}
-
       # Runs Snyk Infrastructure as Code (IaC) analysis and uploads result to Snyk.
       - name: Snyk IaC test and report
         run: | 
@@ -89,17 +82,14 @@ jobs:
           snyk iac test --report  --sarif > ${{env.SARIF_FOLDER}}/snyk-iac.sarif || true       
         working-directory: ./terraform
       
-      - name: Check results
-        run: ls -l ${{env.SARIF_FOLDER}}
-
-        # Build the docker image for testing
+      # Build the docker image for testing
       - name: Build a Docker image
         run: docker build -t your/image-to-test . 
         # Runs Snyk Container (Container and SCA) analysis and uploads result to Snyk.
       - name: Snyk Container monitor
         run: | 
-          snyk container monitor your/image-to-test --file=Dockerfile --sarif || true
-          snyk container monitor your/image-to-test --file=Dockerfile  --sarif > ${{env.SARIF_FOLDER}}/snyk-container.sarif || true
+          snyk container test your/image-to-test --file=Dockerfile --sarif || true
+          snyk container test your/image-to-test --file=Dockerfile  --sarif > ${{env.SARIF_FOLDER}}/snyk-container.sarif || true
 
       - name: Check results
         run: ls -l ${{env.SARIF_FOLDER}}
