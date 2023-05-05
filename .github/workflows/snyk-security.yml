@@ -54,8 +54,8 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
       
-      - name: Create results directory
-        run: mkdir ${{env.SARIF_FOLDER}}}
+      - name: Create results directory and give permissions
+        run: mkdir ${{env.SARIF_FOLDER}}} && chmod 777 ${{env.SARIF_FOLDER}}
 
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/dotnet@master
