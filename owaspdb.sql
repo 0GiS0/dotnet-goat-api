@@ -7,8 +7,6 @@ GO
 
 USE owaspdb
 
-GO
-
 CREATE TABLE [dbo].[Users]
 (
   [Id] INT NOT NULL PRIMARY KEY IDENTITY,
