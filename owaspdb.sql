@@ -1,3 +1,7 @@
+CREATE DATABASE owaspdb
+
+GO
+
 USE owaspdb
 
 GO
