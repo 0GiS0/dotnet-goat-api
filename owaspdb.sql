@@ -12,13 +12,17 @@ SET DATEFORMAT mdy
 GO
 
 -- Drop all first
-DROP DATABASE owaspdb;
-GO
+DROP DATABASE IF EXISTS owaspdb;
+GO;
 
 -- Create owaspdb database
 CREATE DATABASE owaspdb
 
-GO
+GO;
+
+USE owaspdb;
+
+GO;
 
 CREATE TABLE [dbo].[Users]
 (
