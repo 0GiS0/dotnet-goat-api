@@ -1,8 +1,6 @@
--- Drop all first
 DROP DATABASE IF EXISTS owaspdb
 GO
 
--- Create owaspdb database
 CREATE DATABASE owaspdb
 
 GO
