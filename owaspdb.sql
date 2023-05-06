@@ -12,7 +12,7 @@ SET DATEFORMAT mdy
 GO
 
 -- Create owaspdb database
-CREATE DATABASE IF NOT EXISTS 'owaspdb'
+CREATE DATABASE owaspdb
 
 GO
 
