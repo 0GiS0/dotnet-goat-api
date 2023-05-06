@@ -1,11 +1,13 @@
-DROP DATABASE IF EXISTS owaspdb
-GO
+DROP DATABASE IF EXISTS owaspdb;
+GO;
 
-CREATE DATABASE owaspdb
+CREATE DATABASE owaspdb;
 
-GO
+GO;
 
-USE owaspdb
+USE owaspdb;
+
+GO;
 
 CREATE TABLE [dbo].[Users]
 (
@@ -25,7 +27,7 @@ CREATE TABLE [dbo].[Users]
 
 )
 
-GO
+GO;
 
 CREATE TABLE [dbo].[Customers]
 (
@@ -46,7 +48,7 @@ CREATE TABLE [dbo].[Customers]
 
 )
 
-GO
+GO;
 
 CREATE TABLE [dbo].[CreditCards]
 (
@@ -57,7 +59,7 @@ CREATE TABLE [dbo].[CreditCards]
   [UserId] INT NOT NULL FOREIGN KEY REFERENCES [dbo].[Users]([Id]),
 )
 
-GO
+GO;
 
 -- Populate tables
 -- =============================================
