@@ -1,10 +1,3 @@
-DROP DATABASE IF EXISTS owaspdb
-GO
-
-CREATE DATABASE owaspdb
-
-GO
-
 USE owaspdb
 
 GO
