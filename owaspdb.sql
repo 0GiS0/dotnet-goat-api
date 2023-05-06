@@ -1,16 +1,3 @@
-
-SET NOCOUNT ON
-GO
-
-set quoted_identifier on
-GO
-
-/* Set DATEFORMAT so that the date strings are interpreted correctly regardless of
-   the default DATEFORMAT on the server.
-*/
-SET DATEFORMAT mdy
-GO
-
 -- Drop all first
 DROP DATABASE IF EXISTS owaspdb
 GO
