@@ -467,3 +467,4 @@ override.tf.json
 terraform.rc
 terraform/.terraform.lock.hcl
 .dccache
+.DS_Store
