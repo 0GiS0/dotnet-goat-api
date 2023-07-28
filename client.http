@@ -1,0 +1,35 @@
+GET http://localhost:5077/customer?id=1 HTTP/1.1
+
+###
+
+GET http://localhost:5077/customer?id=1%20and%20 1=1 HTTP/1.1
+
+###
+GET http://localhost:5077/profile?id=2 HTTP/1.1
+
+###
+
+POST http://localhost:5077/newuser HTTP/1.1
+content-type: application/json
+
+{
+    "UserName": "gis",
+    "Password": "P@ssw0rd",
+    "Email": "gis@email.com",
+    "IsAdmin": false,
+    "IsLocked": false
+}
+
+###
+
+POST http://localhost:5077/addcreditcard HTTP/1.1
+# POST http://goat-dotnet-api.azurewebsites.net/addcreditcard HTTP/1.1
+content-type: application/json
+
+{
+    "CardNumber": "1234567890123456",
+    "ExpirationDate": "2020-12-31",
+    "CVV": "123",
+    "UserId": 1
+    
+}

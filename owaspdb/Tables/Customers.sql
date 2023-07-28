@@ -1,0 +1,18 @@
+CREATE TABLE [dbo].[Customers]
+(
+  [Id] INT NOT NULL PRIMARY KEY IDENTITY,
+  [Name] NVARCHAR(50) NOT NULL,
+  [Address] NVARCHAR(50) NOT NULL,
+  [City] NVARCHAR(50) NOT NULL,
+  [State] NVARCHAR(50) NOT NULL,
+  [Zip] NVARCHAR(50) NOT NULL,
+  [Country] NVARCHAR(50) NOT NULL,
+  [Phone] NVARCHAR(50) NOT NULL,
+  [Email] NVARCHAR(50) NOT NULL,
+  [CreditCard] NVARCHAR(50) NOT NULL,
+  [CreditCardType] NVARCHAR(50) NOT NULL,
+  [CreditCardExpiration] NVARCHAR(50) NOT NULL,
+  [Username] NVARCHAR(50) NOT NULL,
+  [Password] NVARCHAR(50) NOT NULL
+
+)

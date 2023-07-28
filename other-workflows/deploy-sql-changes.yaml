@@ -1,0 +1,26 @@
+name: Deploy SQL database
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - ".github/workflows/*"      
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  build:
+    name: Build and analyze
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout repository
+          uses: actions/checkout@v3
+        - uses: azure/login@v1                            # Azure login required to add a temporary firewall rule
+          with:
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
+        - uses: azure/sql-action@v2.1
+          with:
+            connection-string: ${{ secrets.SQL_CONNECTION_STRING }}
+            path: owaspdb/owaspdb.sqlproj
+            action: publish
+            build-arguments: '-c Release'                 # Optional build options passed to dotnet build
+            arguments: '/p:DropObjectsNotInSource=true'   # Optional properties and parameters for SqlPackage Publish
