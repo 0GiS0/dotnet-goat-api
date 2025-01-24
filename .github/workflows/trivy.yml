@@ -15,7 +15,7 @@ on:
     - cron: '45 4 * * 0'
 
 env:
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: 0gis0/dotnet-goat-api
 
 permissions:
   contents: read
